@@ -14,22 +14,21 @@ public class LinkedHashMapContacts {
         this.contacts = contacts;
     }
 
-    public void newContacts() {
-        if (!contacts.isEmpty()) {
-            if (getDataScanner("Перечень контактов не пуст, " +
-                    "\nчтобы очистить введите 0: ").equals("0")) {
-                contacts.clear();
-            }
-        }
-        while (true) {
-            addNewContact();
-            if (getDataScanner("Завершить введите 0, продолжить нажмите enter : ").equals("0")) {
-                break;
-            }
-            ;
-        }
+    public LinkedHashMap<String, String> getContacts() {
+        return contacts;
     }
 
+    public void newContacts() {
+
+        while (true) {
+        addNewContact();
+        if (getDataScanner("Завершить ввод контактов введите 0,\n" +
+                " продолжить ввод контактов нажмите enter : ").equals("0")) {
+            break;
+        }
+    }
+}
+    public void clearContacts(){contacts.clear();}
     public void addNewContact() {
         String email;
         String name = getDataScanner("Введите имя: ");

@@ -2,36 +2,38 @@ package task_01_02;
 
 import java.util.HashMap;
 import java.util.concurrent.atomic.AtomicInteger;
-
 import static utils.DoubleSpaceKiller.doubleSpaceKiller;
 import static utils.GetDataScanner.getDataScanner;
 
 public class HashMapOrder {
     private HashMap<String, Integer> order;
 
+    public HashMap<String, Integer> getOrder() {
+        return order;
+    }
+
+
     public HashMapOrder(HashMap<String, Integer> order) {
         this.order = order;
     }
-
+    public void clearOrder(){order.clear();}
     public int findProductQuantity(String productName) {
-        return order.getOrDefault(productName, 0);
-    }
+      return order.getOrDefault(productName,-1);}
+
 
     public void showProductQuantity() {
         String productName = getDataScanner("Введите наименование товара для поиска: ");
-        System.out.println("\nТовара с наименованием `" + productName + "` в количестве " + findProductQuantity(productName));
+        int quantity = findProductQuantity(productName);
+        if (quantity<0){System.out.println("Товара с наименованием " + productName + " не найден");}
+        else System.out.println("\nТовара с наименованием `" + productName + "` в количестве " + quantity);
     }
 
     public void newOrder() {
-        if (!order.isEmpty()) {
-            if (getDataScanner("Перечень товаров не пуст, " +
-                    "\nчтобы очистить введите 0: ").equals("0")) {
-                order.clear();
-            }
-        }
+
         while (true) {
             addProductToOrder();
-            if (getDataScanner("Завершить введите 0, продолжить нажмите enter : ").equals("0")) {
+            if (getDataScanner("Завершить ввод товаров введите 0,\n" +
+                    " продолжить ввод товаров нажмите enter : ").equals("0")) {
                 break;
             }
         }
